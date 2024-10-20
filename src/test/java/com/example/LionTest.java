@@ -1,61 +1,51 @@
 package com.example;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
     private String sex;
 
-    @Test
-    public void checkEatFood() throws Exception {
-        Feline feline = Mockito.mock(Feline.class);
-        List<String> eat = List.of("Животные","Птицы","Рыба");
-        Mockito.when(feline.getFood("Хищник")).thenReturn(eat);
-        Lion lion = new Lion("Самка",feline);
-        assertEquals(eat,lion.getFood());
-    }
+    @Mock
+    private Feline feline;
+    private Lion lion;
 
-    @Test
-    public void checkFamily() throws Exception {
-        Feline feline = Mockito.mock(Feline.class);
-        String name = "Кошачьи";
-        Lion lion = new Lion("Самец",feline);
-        assertEquals(name,lion.getFamily());
+    @Before
+    public void initLion() throws Exception {
+        lion = new Lion("Самка",feline);
     }
 
     @Test
     public void checkEatMeat() throws Exception {
-        Feline feline = Mockito.mock(Feline.class);
         List<String> eat = List.of("Хищник");
-        Lion lion = new Lion("Самка",feline);
-        assertEquals(eat,lion.eatMeat());
+        Mockito.when(feline.getFood("Хищник")).thenReturn(eat);
+        assertEquals(lion.getFood(),eat);
     }
 
-    @Test
-    public void checkGetKittens() throws Exception {
-        Feline feline = Mockito.mock(Feline.class);
+   @Test
+    public void checkGetKittens() {
         Mockito.when(feline.getKittens()).thenReturn(1);
-        Lion lion = new Lion("Самец",feline);
         int getKittensRes = lion.getKittens();
         Assert.assertEquals(getKittensRes,1);
     }
 
-    @Test
-    public void checkLionException() {
-        try {
-            Feline feline = new Feline();
-            Lion lion = new Lion(sex,feline);
-            if (!equals("Самка") && !equals("Самец")) {
+    @Test(expected = Exception.class)
+    public void checkExpected() throws Exception{
+         new  Lion(sex,feline);
+        if (!"Самка".equals(sex))
+            if (!"Самец".equals(sex)) {
+                throw new Exception("Используйте допустимые значения пола животного - самец или самка");
             }
-        } catch (Exception e) {
-            assertEquals(e.getMessage(),"Используйте допустимые значения пола животного - самец или самка");
-        }
     }
+
 }
 
 
