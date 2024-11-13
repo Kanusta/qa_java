@@ -1,8 +1,6 @@
 package courierGenerator;
 
-
 import Praktikum.Courier;
-
 import static utils.Utils.randomString;
 
 public class CourierGenerator {

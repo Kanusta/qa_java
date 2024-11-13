@@ -7,7 +7,6 @@ import java.util.List;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 
-
 @RunWith(Parameterized.class)
 public class ParametrsTest {
     private static String firstName;
@@ -57,4 +56,3 @@ public class ParametrsTest {
                 .assertThat().statusCode(201);
     }
     }
-

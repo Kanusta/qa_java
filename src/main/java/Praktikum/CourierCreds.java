@@ -29,4 +29,3 @@ public class CourierCreds {
         return new CourierCreds(courier.getLogin(), courier.getPassword());
     }
 }
-

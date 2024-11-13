@@ -1,2 +1,4 @@
-ScooterTest.class
 ParametrsTest.class
+CreateCourierTest.class
+LoginCourierTest.class
+OrderTest.class
